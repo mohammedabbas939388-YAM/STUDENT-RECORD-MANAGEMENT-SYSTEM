@@ -1,0 +1,20 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+typedef struct Student
+{
+        int rollno;
+        char name[50];
+        float percentage;
+        struct Student *next;
+}std;
+void addnode(std **);
+void deletenode(std **);
+void modifyrecord(std *);
+void displayrecords(std *);
+void saverecfile(std *);
+void exitm(std **);
+void sort(std *);
+void del_all(std **);
+void rev_list(std **);
+
