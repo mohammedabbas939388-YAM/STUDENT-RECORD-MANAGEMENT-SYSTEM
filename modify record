@@ -1,0 +1,124 @@
+#include"student.h"
+void modifyrecord(std *ptr)
+{
+
+        int rln,co=0;
+        char op,name[50];
+        if(ptr==0)
+        {
+                printf("No records found\n");
+                return ;
+        }
+        printf("Enter Which record to search for modification\n");
+
+        printf("Select R/r : Search by roll number \nN/n : Search by name \nP/p : Search by percentage\n");
+
+        printf("Enter ur choice\n");
+        scanf(" %c",&op);
+        switch(op)
+        {
+                case 'R':
+                case'r':
+                        {
+                                printf("Eneter rollno to search student record \n");
+                                scanf(" %d",&rln);
+                                while(ptr)
+                                {
+                                        if(ptr->rollno==rln)
+                                        {
+                                                printf("%d %s %f\n",ptr->rollno,ptr->name,ptr->percentage);
+                                                printf("Enter Updated name & percentage\n");
+                                                scanf("%s %f",ptr->name,&ptr->percentage);
+                                        }
+                                        ptr=ptr->next;
+                                }
+                        }
+                        break;
+
+
+                case'N':
+                case 'n':{
+                                 std *mod;
+                                 printf("Enter name \n");
+                                 scanf(" %s",name);
+                                 while(ptr)
+                                 {
+                                         if((strcmp(name,ptr->name))==0)
+                                         {
+                                                 mod=ptr->next;
+n:
+                                                 while(mod)
+                                                 {
+                                                         if((strcmp(ptr->name,mod->name))==0)
+                                                         {
+                                                                 co++;
+                                                                 if(co==1)
+                                                                 {
+                                                                         printf("\nMore than One Records Found..\n");
+                                                                         printf("\n%d %s %f\n",ptr->rollno,ptr->name,ptr->percentage);
+                                                                 }
+                                                                 printf("%d %s %f\n",mod->rollno,mod->name,mod->percentage);
+                                                         }
+                                                         mod=mod->next;
+                                                 }
+                                                 if(co>0)
+                                                         goto n;
+                                                 printf("\n%d %s %f\n",ptr->rollno,ptr->name,ptr->percentage);
+                                                 printf("\nEnter name and percentage to Modify : ");
+                                                 scanf("%s %f",ptr->name,&ptr->percentage);
+                                                 printf("\nModified Successfully..\n");
+                                                 return;
+                                         }
+                                         ptr=ptr->next;
+                                 }
+                                 printf("\033[31m\nInvalid Name....\n\033[0m");
+                         }
+
+                         break;
+
+                case 'P':
+                case 'p':{
+                                 float p;
+                                 printf("\nEnter percentage : ");
+                                 scanf(" %f",&p);
+                                 std *after;
+                                 while(ptr)
+                                 {
+                                         if(p==ptr->percentage)
+                                         {
+                                                 after=ptr->next;
+o:
+                                                 while(after)
+                                                 {
+                                                         if(ptr->percentage==after->percentage)
+                                                         {
+                                                                 co++;
+                                                                 if(co==1)
+                                                                 {
+                                                                         printf("\nMore than One Records Found..\n");
+                                                                         printf("\n%d %s %f\n",ptr->rollno,ptr->name,ptr->percentage);
+                                                                 }
+                                                                 printf("%d %s %f\n",after->rollno,after->name,after->percentage);
+                                                         }
+                                                         after=after->next;
+                                                 }
+                                                 if(co>0)
+                                                         goto o;
+                                                 printf("\n%d %s %f\n",ptr->rollno,ptr->name,ptr->percentage);
+                                                 printf("\nEnter name and percentage to Modify : ");
+                                                 scanf("%s %f",ptr->name,&ptr->percentage);
+                                                 printf("\nModified Successfully..\n");
+                                                 return;
+                                         }
+                                         ptr=ptr->next;
+                                 }
+                                 printf("\033[31m\nInvalid Percentage....\n\033[0m");
+
+                         }
+                         break;
+
+
+
+        }
+
+}
